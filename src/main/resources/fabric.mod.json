@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "schmarrn-fireworks",
+  "version": "${version}",
+  "name": "Schmarrn Fireworks",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/andi/schmarrn-fireworks"
+  },
+  "license": "unlicense",
+  "icon": "assets/schmarrn-fireworks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworks"]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
