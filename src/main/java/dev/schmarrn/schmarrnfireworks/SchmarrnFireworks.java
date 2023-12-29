@@ -7,6 +7,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +20,8 @@ public class SchmarrnFireworks implements ModInitializer {
     public static final double EXPLOSION_FORCE = 0.25;
 
     public static final Item FIREWORK_ROCKET = new SchmarrnFireworkRocketItem(new FabricItemSettings());
+
+    public static final RecipeSerializer<SchmarrnFireworkRocketRecipe> SCHMARRN_FIREWORK_ROCKET_RECIPE = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation(MODID, "custom_rocket_recipe"), new SimpleCraftingRecipeSerializer<>(SchmarrnFireworkRocketRecipe::new));
 
     @Override
     public void onInitialize() {
