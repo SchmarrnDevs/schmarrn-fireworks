@@ -19,7 +19,7 @@ public class SchmarrnFireworks implements ModInitializer {
     public static final String MODID = "schmarrn-fireworks";
     public static final double EXPLOSION_FORCE = 0.25;
 
-    public static final Item FIREWORK_ROCKET = new SchmarrnFireworkRocketItem(new FabricItemSettings());
+    public static final Item FIREWORK_ROCKET = new SchmarrnFireworkRocketItem(new FabricItemSettings().maxCount(1));
 
     public static final RecipeSerializer<SchmarrnFireworkRocketRecipe> SCHMARRN_FIREWORK_ROCKET_RECIPE = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation(MODID, "custom_rocket_recipe"), new SimpleCraftingRecipeSerializer<>(SchmarrnFireworkRocketRecipe::new));
 
