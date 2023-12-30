@@ -61,13 +61,15 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
                 listTag.remove(0);
                 rocketItem.removeTagKey(SchmarrnFireworkRocketItem.TAG_ITEM);
 
+                Vec3 dir = this.getDeltaMovement();
+
                 ItemEntity itementity = new ItemEntity(
                         level,
                         pos.x, pos.y, pos.z,
                         storedItem,
-                        this.random.nextDouble() * 2 * SchmarrnFireworks.EXPLOSION_FORCE - SchmarrnFireworks.EXPLOSION_FORCE,
-                        this.random.nextDouble() * SchmarrnFireworks.EXPLOSION_FORCE,
-                        this.random.nextDouble() * 2 * SchmarrnFireworks.EXPLOSION_FORCE - SchmarrnFireworks.EXPLOSION_FORCE
+                        dir.x * SchmarrnFireworks.EXPLOSION_FORCE,
+                        dir.y * SchmarrnFireworks.EXPLOSION_FORCE,
+                        dir.z * SchmarrnFireworks.EXPLOSION_FORCE
                 );
                 level.addFreshEntity(itementity);
             }
