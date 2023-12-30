@@ -8,6 +8,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import dev.schmarrn.schmarrnfireworks.SchmarrnFireworkRocketEntity;
 import dev.schmarrn.schmarrnfireworks.SchmarrnFireworks;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,12 +16,16 @@ import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(CrossbowItem.class)
 abstract public class CrossbowItemMixin extends ProjectileWeaponItem implements Vanishable{
@@ -36,11 +41,25 @@ abstract public class CrossbowItemMixin extends ProjectileWeaponItem implements 
             )
     )
     private static boolean schmarrnfireworks$isRocket(boolean original, @Local(ordinal = 1) ItemStack instance) {
-        SchmarrnFireworks.LOGGER.info("is our Rocket? " + instance.is(SchmarrnFireworks.FIREWORK_ROCKET));
         if (instance.is(SchmarrnFireworks.FIREWORK_ROCKET)) {
             return true;
         }
         return original;
+    }
+
+    @WrapOperation(
+            method = "appendHoverText",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/Item;appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V"
+            )
+    )
+    private static void schmarrnfireworks$hoverText(Item instance, ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag, Operation<Void> original) {
+        if (itemStack.is(SchmarrnFireworks.FIREWORK_ROCKET)) {
+            SchmarrnFireworks.FIREWORK_ROCKET.appendHoverText(itemStack, level, list, tooltipFlag);
+        } else {
+            original.call(instance, itemStack, level, list, tooltipFlag);
+        }
     }
 
     @ModifyReturnValue(
@@ -83,7 +102,6 @@ abstract public class CrossbowItemMixin extends ProjectileWeaponItem implements 
     )
     private static FireworkRocketEntity schmarrnfireworks$SchamrrnFireworkRocketEntity(Level level, ItemStack itemStack, Entity entity, double d, double e, double f, boolean bl) {
         if (itemStack.is(SchmarrnFireworks.FIREWORK_ROCKET)) {
-            SchmarrnFireworks.LOGGER.info("replaced with our rocket");
             return new SchmarrnFireworkRocketEntity(level, itemStack, entity, d, e, f, bl);
         } else {
             return new FireworkRocketEntity(level, itemStack, entity, d, e, f, bl);

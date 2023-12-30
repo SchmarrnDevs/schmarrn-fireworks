@@ -48,11 +48,7 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
         Level level = this.level();
         Vec3 pos = this.position();
 
-        SchmarrnFireworks.LOGGER.info("EXPLODE");
-
         if (!level.isClientSide) {
-            SchmarrnFireworks.LOGGER.info("EXPLODE SERVER");
-
             ItemStack rocketItem = this.entityData.get(DATA_ID_FIREWORKS_ITEM);
             CompoundTag compoundTag = rocketItem.isEmpty() ? null : rocketItem.getTag();
             ListTag listTag = compoundTag != null ? compoundTag.getList(SchmarrnFireworkRocketItem.TAG_ITEM, 10) : null;
