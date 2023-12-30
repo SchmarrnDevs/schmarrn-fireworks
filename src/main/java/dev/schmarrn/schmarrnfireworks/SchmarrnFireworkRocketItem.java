@@ -146,25 +146,15 @@ public class SchmarrnFireworkRocketItem extends FireworkRocketItem {
     // Both
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
-        ListTag listTag;
-        CompoundTag compoundTag = itemStack.getTagElement(TAG_FIREWORKS);
-        if (compoundTag == null) {
-            return;
-        }
-        if (compoundTag.contains(TAG_FLIGHT, 99)) {
-            list.add(Component.translatable("item.minecraft.firework_rocket.flight").append(CommonComponents.SPACE).append(String.valueOf(compoundTag.getByte(TAG_FLIGHT))).withStyle(ChatFormatting.GRAY));
-        }
-        if (!(listTag = compoundTag.getList(TAG_EXPLOSIONS, 10)).isEmpty()) {
-            for (int i = 0; i < listTag.size(); ++i) {
-                CompoundTag compoundTag2 = listTag.getCompound(i);
-                ArrayList<Component> list2 = Lists.newArrayList();
-                FireworkStarItem.appendHoverText(compoundTag2, list2);
-                if (list2.isEmpty()) continue;
-                for (int j = 1; j < list2.size(); ++j) {
-                    list2.set(j, Component.literal("  ").append((Component)list2.get(j)).withStyle(ChatFormatting.GRAY));
-                }
-                list.addAll(list2);
-            }
+        super.appendHoverText(itemStack, level, list, tooltipFlag);
+        CompoundTag compoundTag = itemStack.getOrCreateTag();
+        if (compoundTag.contains(TAG_ITEM)) {
+            ListTag listTag = compoundTag.getList(TAG_ITEM, 10);
+            ItemStack storedItem = ItemStack.of(listTag.getCompound(0));
+
+            list.add(Component.translatable("item.schmarrn-fireworks.rocket.stored_item").append(CommonComponents.SPACE).append(storedItem.getHoverName()).withStyle(ChatFormatting.GRAY));
+        } else {
+            list.add(Component.translatable("item.schmarrn-fireworks.rocket.empty").withStyle(ChatFormatting.GRAY));
         }
     }
 }
