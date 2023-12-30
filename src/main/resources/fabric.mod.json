@@ -14,7 +14,8 @@
   "environment": "*",
   "entrypoints": {
     "main": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworks"],
-    "client": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworksClient"]
+    "client": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworksClient"],
+    "emi": ["dev.schmarrn.schmarrnfireworks.EmiCompat"]
   },
   "depends": {
     "fabricloader": ">=${loader_version}",
