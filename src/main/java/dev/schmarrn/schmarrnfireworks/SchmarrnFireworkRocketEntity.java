@@ -67,9 +67,9 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
                         level,
                         pos.x, pos.y, pos.z,
                         storedItem,
-                        dir.x * SchmarrnFireworks.EXPLOSION_FORCE,
-                        dir.y * SchmarrnFireworks.EXPLOSION_FORCE,
-                        dir.z * SchmarrnFireworks.EXPLOSION_FORCE
+                        dir.x,
+                        dir.y,
+                        dir.z
                 );
                 level.addFreshEntity(itementity);
             }

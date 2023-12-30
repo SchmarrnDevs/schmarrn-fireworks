@@ -17,6 +17,9 @@
     "client": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworksClient"],
     "emi": ["dev.schmarrn.schmarrnfireworks.EmiCompat"]
   },
+  "mixins": [
+    "schmarrn-fireworks.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

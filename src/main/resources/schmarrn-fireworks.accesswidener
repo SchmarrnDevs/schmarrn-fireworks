@@ -4,3 +4,5 @@ extendable method net/minecraft/world/entity/projectile/FireworkRocketEntity exp
 accessible field net/minecraft/world/entity/projectile/FireworkRocketEntity DATA_ID_FIREWORKS_ITEM Lnet/minecraft/network/syncher/EntityDataAccessor;
 
 mutable field net/minecraft/world/item/ProjectileWeaponItem ARROW_OR_FIREWORK Ljava/util/function/Predicate;
+
+accessible method net/minecraft/world/item/CrossbowItem getChargedProjectiles (Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;

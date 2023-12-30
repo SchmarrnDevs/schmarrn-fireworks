@@ -1,0 +1,11 @@
+{
+  "required": false,
+  "package": "dev.schmarrn.schmarrnfireworks.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CrossbowItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
