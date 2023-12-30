@@ -38,5 +38,7 @@ public class SchmarrnFireworks implements ModInitializer {
                 output.accept(itemStack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
         });
+
+        ProjectileWeaponItem.ARROW_OR_FIREWORK = ProjectileWeaponItem.ARROW_OR_FIREWORK.or((itemStack) -> itemStack.is(FIREWORK_ROCKET));
     }
 }

@@ -2,3 +2,5 @@ accessWidener v2 named
 
 extendable method net/minecraft/world/entity/projectile/FireworkRocketEntity explode ()V
 accessible field net/minecraft/world/entity/projectile/FireworkRocketEntity DATA_ID_FIREWORKS_ITEM Lnet/minecraft/network/syncher/EntityDataAccessor;
+
+mutable field net/minecraft/world/item/ProjectileWeaponItem ARROW_OR_FIREWORK Ljava/util/function/Predicate;
