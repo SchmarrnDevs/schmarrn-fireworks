@@ -10,9 +10,11 @@
   },
   "license": "unlicense",
   "icon": "assets/schmarrn-fireworks/icon.png",
+  "accessWidener": "schmarrn-fireworks.accesswidener",
   "environment": "*",
   "entrypoints": {
-    "main": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworks"]
+    "main": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworks"],
+    "client": ["dev.schmarrn.schmarrnfireworks.SchmarrnFireworksClient"]
   },
   "depends": {
     "fabricloader": ">=${loader_version}",

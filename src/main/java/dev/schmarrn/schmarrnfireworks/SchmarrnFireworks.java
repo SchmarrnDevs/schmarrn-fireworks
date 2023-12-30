@@ -6,9 +6,10 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,8 @@ public class SchmarrnFireworks implements ModInitializer {
     public static final Item FIREWORK_ROCKET = new SchmarrnFireworkRocketItem(new FabricItemSettings().maxCount(1));
 
     public static final RecipeSerializer<SchmarrnFireworkRocketRecipe> SCHMARRN_FIREWORK_ROCKET_RECIPE = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, new ResourceLocation(MODID, "custom_rocket_recipe"), new SimpleCraftingRecipeSerializer<>(SchmarrnFireworkRocketRecipe::new));
+
+    public static final EntityType<SchmarrnFireworkRocketEntity> ENTITY_TYPE = Registry.register(BuiltInRegistries.ENTITY_TYPE, new ResourceLocation(MODID, "firework_rocket_et"), EntityType.Builder.<SchmarrnFireworkRocketEntity>of(SchmarrnFireworkRocketEntity::new, MobCategory.MISC).build(""));
 
     @Override
     public void onInitialize() {
