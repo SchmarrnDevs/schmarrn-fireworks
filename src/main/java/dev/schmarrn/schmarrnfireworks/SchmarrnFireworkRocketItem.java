@@ -74,7 +74,7 @@ public class SchmarrnFireworkRocketItem extends FireworkRocketItem {
     }
 
     // Bundle stuff
-    private static final String TAG_ITEM = "Items";
+    public static final String TAG_ITEM = "Items";
 
     @Override
     public boolean isFoil(ItemStack itemStack) {

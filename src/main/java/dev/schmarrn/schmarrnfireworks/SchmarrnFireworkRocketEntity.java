@@ -1,17 +1,16 @@
 package dev.schmarrn.schmarrnfireworks;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
     public SchmarrnFireworkRocketEntity(EntityType<? extends FireworkRocketEntity> entityType, Level level) {
@@ -44,18 +43,25 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
         Level level = this.level();
         Vec3 pos = this.position();
 
-        Random rand = new Random();
-
         if (!level.isClientSide) {
-            ItemEntity itementity = new ItemEntity(
-                    level,
-                    pos.x, pos.y, pos.z,
-                    new ItemStack(Items.DIAMOND, 1),
-                    rand.nextDouble(-SchmarrnFireworks.EXPLOSION_FORCE, SchmarrnFireworks.EXPLOSION_FORCE),
-                    rand.nextDouble(SchmarrnFireworks.EXPLOSION_FORCE),
-                    rand.nextDouble(-SchmarrnFireworks.EXPLOSION_FORCE, SchmarrnFireworks.EXPLOSION_FORCE)
-            );
-            level.addFreshEntity(itementity);
+            ItemStack rocketItem = this.entityData.get(DATA_ID_FIREWORKS_ITEM);
+            CompoundTag compoundTag = rocketItem.isEmpty() ? null : rocketItem.getTag();
+            ListTag listTag = compoundTag != null ? compoundTag.getList(SchmarrnFireworkRocketItem.TAG_ITEM, 10) : null;
+            if (listTag != null && !listTag.isEmpty()) {
+                ItemStack storedItem = ItemStack.of(listTag.getCompound(0));
+                listTag.remove(0);
+                rocketItem.removeTagKey(SchmarrnFireworkRocketItem.TAG_ITEM);
+
+                ItemEntity itementity = new ItemEntity(
+                        level,
+                        pos.x, pos.y, pos.z,
+                        storedItem,
+                        this.random.nextDouble() * 2 * SchmarrnFireworks.EXPLOSION_FORCE - SchmarrnFireworks.EXPLOSION_FORCE,
+                        this.random.nextDouble() * SchmarrnFireworks.EXPLOSION_FORCE,
+                        this.random.nextDouble() * 2 * SchmarrnFireworks.EXPLOSION_FORCE - SchmarrnFireworks.EXPLOSION_FORCE
+                );
+                level.addFreshEntity(itementity);
+            }
         }
     }
 }
