@@ -57,21 +57,21 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
             CompoundTag compoundTag = rocketItem.isEmpty() ? null : rocketItem.getTag();
             ListTag listTag = compoundTag != null ? compoundTag.getList(SchmarrnFireworkRocketItem.TAG_ITEM, 10) : null;
             if (listTag != null && !listTag.isEmpty()) {
-                ItemStack storedItem = ItemStack.of(listTag.getCompound(0));
-                listTag.remove(0);
-                rocketItem.removeTagKey(SchmarrnFireworkRocketItem.TAG_ITEM);
-
                 Vec3 dir = this.getDeltaMovement();
+                for (int ii = 0; ii < listTag.size(); ++ii) {
+                    ItemStack storedItem = ItemStack.of(listTag.getCompound(ii));
 
-                ItemEntity itementity = new ItemEntity(
-                        level,
-                        pos.x, pos.y, pos.z,
-                        storedItem,
-                        dir.x,
-                        dir.y,
-                        dir.z
-                );
-                level.addFreshEntity(itementity);
+                    ItemEntity itementity = new ItemEntity(
+                            level,
+                            pos.x, pos.y, pos.z,
+                            storedItem,
+                            dir.x,
+                            dir.y,
+                            dir.z
+                    );
+                    level.addFreshEntity(itementity);
+                }
+                rocketItem.removeTagKey(SchmarrnFireworkRocketItem.TAG_ITEM);
             }
         }
     }
