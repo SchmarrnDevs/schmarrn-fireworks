@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
+    private boolean ghostArrow = false;
     public SchmarrnFireworkRocketEntity(EntityType<? extends FireworkRocketEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -42,9 +43,16 @@ public class SchmarrnFireworkRocketEntity extends FireworkRocketEntity {
         return SchmarrnFireworks.ENTITY_TYPE;
     }
 
+    public void setGhostArrow() {
+        ghostArrow = true;
+    }
+
     @Override
     public void explode() {
         super.explode();
+        if (ghostArrow) {
+            return;
+        }
         Level level = this.level();
         Vec3 pos = this.position();
 
