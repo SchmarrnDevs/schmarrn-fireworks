@@ -100,7 +100,7 @@ abstract public class CrossbowItemMixin extends ProjectileWeaponItem implements 
                     target = "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/Entity;DDDZ)Lnet/minecraft/world/entity/projectile/FireworkRocketEntity;"
             )
     )
-    private static FireworkRocketEntity schmarrnfireworks$SchamrrnFireworkRocketEntity(Level level, ItemStack itemStack, Entity entity, double d, double e, double f, boolean bl, @Local(name = "i") float directions) {
+    private static FireworkRocketEntity schmarrnfireworks$SchamrrnFireworkRocketEntity(Level level, ItemStack itemStack, Entity entity, double d, double e, double f, boolean bl, @Local(ordinal = 3) float directions) {
         // directions can only be -10.0f, 0.0f, and 10.0f
         if (itemStack.is(SchmarrnFireworks.FIREWORK_ROCKET)) {
             SchmarrnFireworkRocketEntity rocket = new SchmarrnFireworkRocketEntity(level, itemStack, entity, d, e, f, bl);
